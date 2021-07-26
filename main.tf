@@ -22,4 +22,6 @@ locals {
 module "vcn" {
   source  = "Terraform-Modules-Lib/vcn/oci"
   
+  compartment_id  = local.compartment_id
+  name = local.name
 }
