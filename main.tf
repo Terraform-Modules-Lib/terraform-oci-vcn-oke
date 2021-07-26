@@ -25,7 +25,5 @@ module "vcn" {
   compartment_id  = local.compartment_id
   name = local.name
   
-  subnets = [
-    local.endpoint_net
-  ]
+  subnets = concat(local.nodepool_nets, [local.endpoint_net], [local.ingress_net])
 }
