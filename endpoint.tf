@@ -19,5 +19,5 @@ locals {
 }
 
 output "acl_workers_to_endpoint" {
-  values = local.acl_workers_to_endpoint
+  value = local.acl_workers_to_endpoint
 }
