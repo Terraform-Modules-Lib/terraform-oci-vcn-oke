@@ -32,7 +32,32 @@ locals {
         }
       )
 
-      egress = merge({}, {})
+      egress = merge(
+        { oci_services = {
+            description = "Allow Kubernetes control plane to communicate with OKE."
+            destination = "0.0.0.0/0"
+            protocol = "tcp"
+            dst_port = 443
+          }
+        },
+        { for net in try(local.subnets.nodepools, []):
+            format("endpoint_to_%s", try(net.name, net.cidr)) => {
+              description = "All traffic to worker nodes."
+              destination = net.cidr
+              protocol = "tcp"
+            }
+        },
+        { for net in try(local.subnets.nodepools, []):
+            format("path_discovery_%s", try(net.name, net.cidr)) => {
+              description = "Path discovery."
+              destination = net.cidr
+              protocol = "icmp"
+              type = 3
+              code = 4
+            }
+        }
+      )
+
     }
   }
   
