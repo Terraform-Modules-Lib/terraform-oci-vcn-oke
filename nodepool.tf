@@ -14,7 +14,7 @@ locals {
           },
           { workers_to_controlplane = {
               description = "Allow Kubernetes control plane to communicate with worker nodes."
-              source = local.cidrs.endpoint
+              source = local.subnets.endpoint.cidr
               protocol = "tcp"
             }
           },
@@ -28,7 +28,7 @@ locals {
           },
           { worker_ssh = {
               description = "(optional) Allow inbound SSH traffic to worker nodes."
-              source = local.cidrs.endpoint
+              source = local.subnets.endpoint.cidr
               protocol = "tcp"
               dst_port = 22
             }
