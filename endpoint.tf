@@ -3,7 +3,9 @@ locals {
     name = try(local.subnets.endpoint.name, "endpoint")
     cidr = local.subnets.endpoint.cidr
     public = try(local.subnets.endpoint.public, false)
-    acl = local.acl_workers_to_endpoint
+    acl = {
+      ingress = local.acl_workers_to_endpoint
+    }
   }
   
   
@@ -16,8 +18,4 @@ locals {
     }
   }
     
-}
-
-output "acl_workers_to_endpoint" {
-  value = local.acl_workers_to_endpoint
 }
