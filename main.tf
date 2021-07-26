@@ -11,4 +11,15 @@ terraform {
 }
 
 locals {
+  compartment_id = var.compartment_id
+  name = var.name
+  
+  subnets = var.subnets
+  
+  vcn = module.vcn.vcn
+}
+
+module "vcn" {
+  source  = "Terraform-Modules-Lib/vcn/oci"
+  
 }
