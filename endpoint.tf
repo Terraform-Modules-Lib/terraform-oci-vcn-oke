@@ -16,5 +16,8 @@ locals {
     }
   }
     
-    
+}
+
+output "acl_workers_to_endpoint" {
+  valiue = local.acl_workers_to_endpoint
 }
