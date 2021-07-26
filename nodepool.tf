@@ -4,6 +4,7 @@ locals {
         name = try(net.name, net.cidr)
         cidr = net.cidr
         public = try(net.public, false)
+        acl = {}
       }
   ]
 }
