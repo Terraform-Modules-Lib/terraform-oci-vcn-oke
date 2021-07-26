@@ -24,4 +24,8 @@ module "vcn" {
   
   compartment_id  = local.compartment_id
   name = local.name
+  
+  subnets = [
+    local.endpoint_net
+  ]
 }
