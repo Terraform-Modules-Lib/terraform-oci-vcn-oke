@@ -7,7 +7,7 @@ locals {
       acl = {
         ingress = merge(
           { for net in try(local.subnets.nodepools, []):
-              format("%s_to_%s", try(net.name, net.cidr)) => {
+              format("%s_to_%s", try(net.name, net.cidr), try(net.name, net.cidr)) => {
                 description = "Allow pods on one worker node to communicate with pods on other worker nodes."
                 source = net.cidr
               }
